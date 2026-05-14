@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import KpiCard from './KpiCard';
 import LineChart from './LineChart';
 import BarChart from './BarChart';
+import ParkingControlPanel from './ParkingControlPanel';
 
 const todayISO = () => new Date().toISOString().slice(0, 10);
 const defaultFromISO = () => {
@@ -14,10 +15,6 @@ const API_BASE = (process.env.REACT_APP_API_URL || '').replace(/\/+$/, '');
 
 function randomRange(min, max) {
   return Math.round(min + Math.random() * (max - min));
-}
-
-function sampleSeries(count, min, max) {
-  return Array.from({ length: count }, () => randomRange(min, max));
 }
 
 function getMockData(path) {
@@ -146,6 +143,8 @@ export default function AnalyticsDashboard() {
           </label>
         </div>
       </div>
+
+      <ParkingControlPanel />
 
       {error ? <div className="errorBox">{error}</div> : null}
       {loading && !error ? <div className="loading">Loading analytics...</div> : null}

@@ -1,38 +1,358 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.appRoot {
   min-height: 100vh;
+  background: radial-gradient(circle at top left, #4f46e5 0%, #3b82f6 28%, #0f172a 100%);
+  color: white;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.title {
+  font-size: clamp(2.4rem, 3vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 720px;
+  line-height: 1.5;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filter {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 14px;
+  border-radius: 16px;
+  min-width: 160px;
+}
+
+.filter input {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.1);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.filter input:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.9);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.kpiGrid,
+.grid2 {
+  display: grid;
+  gap: 18px;
+}
+
+.kpiGrid {
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  margin-bottom: 18px;
+}
+
+.grid2 {
+  grid-template-columns: 1.8fr 1fr;
+}
+
+.kpiCard,
+.chartCard,
+.parkingPanel,
+.ticketCard,
+.parkingStatus {
+  background: rgba(15, 23, 42, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 30px 120px rgba(15, 23, 42, 0.18);
+}
+
+.kpiCard {
+  padding: 26px 24px;
+  min-height: 150px;
+}
+
+.kpiLabel {
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.82rem;
+  margin-bottom: 14px;
+}
+
+.kpiValue {
+  font-size: 2.4rem;
+  font-weight: 800;
+}
+
+.kpiSub {
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.chartCard {
+  padding: 24px;
+  min-height: 320px;
+}
+
+.chartTitle {
+  font-size: 1.08rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.chartSvg {
+  width: 100%;
+  height: 260px;
+}
+
+.chartGrid {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.chartAxisText {
+  fill: rgba(255, 255, 255, 0.55);
+  font-size: 0.75rem;
+}
+
+.chartLegend {
+  display: flex;
+  gap: 16px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.legendSwatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.loading,
+.errorBox,
+.successBox,
+.emptyState {
+  margin: 16px 0;
+  padding: 16px 18px;
+  border-radius: 18px;
+  font-weight: 600;
+}
+
+.loading {
+  background: rgba(59, 130, 246, 0.18);
+  color: #c7d2fe;
+}
+
+.errorBox {
+  background: rgba(248, 113, 113, 0.16);
+  color: #fde2e2;
+}
+
+.successBox {
+  background: rgba(34, 197, 94, 0.18);
+  color: #dcfce7;
+}
+
+.footNote {
+  margin-top: 24px;
+  color: rgba(255, 255, 255, 0.68);
+  text-align: center;
+}
+
+.parkingPanel {
+  margin-bottom: 26px;
+  padding: 24px;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.panelTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.panelSubtitle {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.panelContent {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 22px;
+}
+
+.parkingForm {
+  display: grid;
+  gap: 16px;
+}
+
+.formGroup {
+  display: grid;
+  gap: 8px;
+}
+
+.formGroup label {
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.95rem;
+}
+
+.formGroup input {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.09);
+  color: white;
+}
+
+.formGroup input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.primaryButton,
+.secondaryButton {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  color: white;
+}
+
+.secondaryButton {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.parkingStatus {
+  padding: 20px;
+}
+
+.ticketCount {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.ticketList {
+  display: grid;
+  gap: 14px;
+}
+
+.ticketCard {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ticketTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ticketToken {
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.statusBadge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.statusBadge.active {
+  background: rgba(34, 197, 94, 0.18);
+  color: #dcfce7;
+}
+
+.statusBadge.closed {
+  background: rgba(59, 130, 246, 0.16);
+  color: #bfdbfe;
+}
+
+.ticketDetail {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.96rem;
+}
+
+.emptyState {
+  color: rgba(255, 255, 255, 0.62);
+  text-align: center;
+}
+
+@media (max-width: 1100px) {
+  .grid2,
+  .parkingPanel .panelContent {
+    grid-template-columns: 1fr;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 720px) {
+  .topBar,
+  .panelHeader,
+  .actionRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters {
+    min-width: 100%;
   }
 }

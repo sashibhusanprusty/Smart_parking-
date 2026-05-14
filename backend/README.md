@@ -20,4 +20,7 @@ API:
 - GET /api/analytics/summary
 - GET /api/analytics/occupancy
 - GET /api/analytics/events
+- POST /api/parking/entry
+- POST /api/parking/exit
+- GET /api/parking/tickets?active=true
 
