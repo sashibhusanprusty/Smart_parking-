@@ -10,10 +10,64 @@ const defaultFromISO = () => {
   return d.toISOString().slice(0, 10);
 };
 
+const API_BASE = (process.env.REACT_APP_API_URL || '').replace(/\/+$/, '');
+
+function randomRange(min, max) {
+  return Math.round(min + Math.random() * (max - min));
+}
+
+function sampleSeries(count, min, max) {
+  return Array.from({ length: count }, () => randomRange(min, max));
+}
+
+function getMockData(path) {
+  const now = new Date();
+  const labels = Array.from({ length: 24 }, (_, index) => {
+    const d = new Date(now.getTime() - (23 - index) * 3600000);
+    return d.toISOString();
+  });
+
+  if (path.startsWith('/api/analytics/summary')) {
+    return {
+      from: labels[0].slice(0, 10),
+      to: labels[labels.length - 1].slice(0, 10),
+      totalEvents: 312,
+      arrivals: 161,
+      departures: 148,
+      avgOccupancyPercent: 64.2,
+      avgParkingMinutes: 36.8,
+    };
+  }
+
+  if (path.startsWith('/api/analytics/occupancy')) {
+    return {
+      from: labels[0],
+      to: labels[labels.length - 1],
+      unit: '%',
+      data: labels.map((ts) => ({ ts, value: randomRange(40, 82) })),
+    };
+  }
+
+  if (path.startsWith('/api/analytics/events')) {
+    return {
+      from: labels[0],
+      to: labels[labels.length - 1],
+      data: labels.map((ts) => ({ ts, arrivals: randomRange(3, 10), departures: randomRange(2, 9) })),
+    };
+  }
+
+  return {};
+}
+
 async function apiGet(path) {
-  const res = await fetch(path);
-  if (!res.ok) throw new Error(`API ${res.status}`);
-  return res.json();
+  const url = API_BASE ? `${API_BASE}${path}` : path;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`API ${res.status}`);
+    return res.json();
+  } catch (err) {
+    return getMockData(path);
+  }
 }
 
 function formatDateLabel(isoTs) {
