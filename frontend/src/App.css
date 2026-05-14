@@ -189,6 +189,98 @@
   text-align: center;
 }
 
+.controlRow {
+  display: grid;
+  grid-template-columns: 1.5fr 0.9fr;
+  gap: 22px;
+  margin-bottom: 22px;
+}
+
+.historyPanel {
+  background: rgba(15, 23, 42, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 30px 120px rgba(15, 23, 42, 0.18);
+  padding: 22px;
+  margin-top: 26px;
+}
+
+.historyHeader,
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.historyControls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.historyControls select,
+.historyControls input {
+  border: none;
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.09);
+  color: white;
+}
+
+.ticketHistoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.mapPanel {
+  background: rgba(15, 23, 42, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 22px;
+}
+
+.spotGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.spotCard {
+  border-radius: 18px;
+  min-height: 90px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 700;
+  color: white;
+}
+
+.spotCard.available {
+  background: rgba(34, 197, 94, 0.18);
+}
+
+.spotCard.occupied {
+  background: rgba(248, 113, 113, 0.18);
+}
+
+.spotLabel {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.spotStatus {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.84);
+}
+
 .parkingPanel {
   margin-bottom: 26px;
   padding: 24px;

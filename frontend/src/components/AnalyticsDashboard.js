@@ -3,6 +3,8 @@ import KpiCard from './KpiCard';
 import LineChart from './LineChart';
 import BarChart from './BarChart';
 import ParkingControlPanel from './ParkingControlPanel';
+import TicketHistoryPanel from './TicketHistoryPanel';
+import ParkingMapPanel from './ParkingMapPanel';
 
 const todayISO = () => new Date().toISOString().slice(0, 10);
 const defaultFromISO = () => {
@@ -144,7 +146,10 @@ export default function AnalyticsDashboard() {
         </div>
       </div>
 
-      <ParkingControlPanel />
+      <div className="controlRow">
+        <ParkingControlPanel />
+        <ParkingMapPanel />
+      </div>
 
       {error ? <div className="errorBox">{error}</div> : null}
       {loading && !error ? <div className="loading">Loading analytics...</div> : null}
@@ -171,6 +176,8 @@ export default function AnalyticsDashboard() {
       <div className="footNote">
         If MongoDB is empty, backend auto-seeds sample events so this dashboard works immediately.
       </div>
+
+      <TicketHistoryPanel />
     </div>
   );
 }

@@ -88,13 +88,24 @@ router.post('/exit', async (req, res) => {
 
 router.get('/tickets', async (req, res) => {
   try {
-    const { active } = req.query;
+    const { active, status, plate, token } = req.query;
     const filter = {};
-    if (active === 'true') {
+
+    if (status === 'ACTIVE' || active === 'true') {
       filter.status = 'ACTIVE';
+    } else if (status === 'CLOSED' || active === 'false') {
+      filter.status = 'CLOSED';
     }
 
-    const tickets = await Ticket.find(filter).sort({ createdAt: -1 }).limit(100);
+    if (plate) {
+      filter.vehiclePlate = new RegExp(plate.trim(), 'i');
+    }
+
+    if (token) {
+      filter.token = token.trim();
+    }
+
+    const tickets = await Ticket.find(filter).sort({ entryTime: -1 }).limit(200);
     res.json(tickets);
   } catch (err) {
     res.status(500).json({ message: 'Failed to load tickets', error: String(err?.message || err) });
